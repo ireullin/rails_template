@@ -1,15 +1,16 @@
 <div class="container-fluid">
   <p id="notice"><%= notice %></p>
 
-  <h1>
-    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-    Listing Scaffold Demos
-  </h1>
+  <h1>Listing Scaffold Demos</h1>
 
   <table class="table table-striped">
     <thead>
       <tr>
-        <th colspan="3"></th>
+        <th colspan="3">
+          <a href="<%= url_for action: 'new' %>">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
+        </th>
         <th>ID</th>
         <th>Name</th>
         <th>Comment</th>
@@ -19,22 +20,53 @@
     </thead>
 
     <tbody>
-      <% @scaffold_demos.each do |scaffold_demo| %>
+      <% @scaffold_demos.each do |row| %>
         <tr>
-          <td><%= link_to 'Show', scaffold_demo %></td>
-          <td><%= link_to 'Edit', edit_scaffold_demo_path(scaffold_demo) %></td>
-          <td><%= link_to 'Destroy', scaffold_demo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <td><%= scaffold_demo.id %></td>
-          <td><%= scaffold_demo.name %></td>
-          <td><%= scaffold_demo.comment %></td>
-          <td><%= scaffold_demo.created_at.localtime %></td>
-          <td><%= scaffold_demo.updated_at.localtime %></td>
+          <td>
+            <a href="<%= url_for action: 'show', id: row.id %>">
+              <span class="glyphicon glyphicon-option-horizontal"></span>
+            </a>
+          </td>
+
+          <td>
+            <a href="<%= url_for action: 'edit', id: row.id %>">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+          </td>
+
+          <td>
+            <a href="<%= url_for action: 'destroy', id: row.id %>" data-confirm="Are you sure?" data-method="delete">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
+
+          <td><%= row.id %></td>
+          <td><%= row.name %></td>
+          <td><%= row.comment %></td>
+          <td><%= row.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          <td><%= row.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
-  <br>
-
-  <%= link_to 'New Scaffold demo', new_scaffold_demo_path %>
 </div>
+
+<script language="javascript">
+$(document).ready(ready);
+function ready()
+{console.log(arguments.callee.name);
+  $(".fancybox.ajax").fancybox({
+    parent      : 'body',
+    maxWidth  : 800,
+    maxHeight : 600,
+    fitToView : false,
+    width   : '70%',
+    height    : '70%',
+    autoSize  : false,
+    closeClick  : false,
+    openEffect  : 'none',
+    closeEffect : 'none'
+  });
+}
+
+</script>
