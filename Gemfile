@@ -23,9 +23,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# bootstrap
-gem 'bootstrap-sass', '~> 3.3.3'
-
 # fancybox2
 gem 'fancybox2-rails', '~> 0.2.8'
 
