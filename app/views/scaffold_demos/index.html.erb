@@ -5,6 +5,7 @@
 
 <%= kaminari_with_dropdown(@rows) %>
 
+<div id="sort-list">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -13,15 +14,15 @@
           <span class="glyphicon glyphicon-plus"></span>
         </a>
       </th>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Comment</th>
-      <th>Created date</th>
-      <th>Updated date</th>
+      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-id">ID</a></th>
+      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-name">Name</a></th>
+      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-comment">Comment</a></th>
+      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-created-date">Created date</a></th>
+      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-updated-date">Updated date</a></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="list">
     <% @rows.each do |row| %>
       <tr>
         <td>
@@ -42,23 +43,46 @@
           </a>
         </td>
 
-        <td><%= row.id %></td>
-        <td><%= row.name %></td>
-        <td><%= row.comment %></td>
-        <td><%= row.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
-        <td><%= row.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td class="sort-id"><%= row.id %></td>
+        <td class="sort-name"><%= row.name %></td>
+        <td class="sort-comment"><%= row.comment %></td>
+        <td class="sort-created-date"><%= row.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td class="sort-updated-date"><%= row.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <%= kaminari_with_dropdown(@rows, dropdown: false) %>
 
 
 <script language="javascript">
 $(document).ready(ready);
 function ready()
-{console.log(arguments.callee.name);
+{
+  initFancybox();
+  intiList();
+}
+
+
+function intiList()
+{//console.log(arguments.callee.name);
+  var options = {
+    valueNames: [
+      "sort-id",
+      "sort-name",
+      "sort-comment",
+      "sort-created-date",
+      "sort-updated-date",
+    ]
+  };
+
+  var table = new List('sort-list', options );
+}
+
+
+function initFancybox()
+{//console.log(arguments.callee.name);
   $(".fancybox").fancybox({
     parent      : 'body',
     maxWidth    : 800,
