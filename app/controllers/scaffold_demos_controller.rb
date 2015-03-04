@@ -4,7 +4,8 @@ class ScaffoldDemosController < ApplicationController
   # GET /scaffold_demos
   # GET /scaffold_demos.json
   def index
-    @scaffold_demos = ScaffoldDemo.all
+    params[:page] ||=1
+    @rows = ScaffoldDemo.page(params[:page]).per(20)
   end
 
   # GET /scaffold_demos/1
@@ -14,7 +15,7 @@ class ScaffoldDemosController < ApplicationController
 
   # GET /scaffold_demos/new
   def new
-    @scaffold_demo = ScaffoldDemo.new
+    @row = ScaffoldDemo.new
   end
 
   # GET /scaffold_demos/1/edit
@@ -24,15 +25,15 @@ class ScaffoldDemosController < ApplicationController
   # POST /scaffold_demos
   # POST /scaffold_demos.json
   def create
-    @scaffold_demo = ScaffoldDemo.new(scaffold_demo_params)
+    @row = ScaffoldDemo.new(scaffold_demo_params)
 
     respond_to do |format|
-      if @scaffold_demo.save
-        format.html { redirect_to @scaffold_demo, notice: 'Scaffold demo was successfully created.' }
-        format.json { render :show, status: :created, location: @scaffold_demo }
+      if @row.save
+        format.html { redirect_to action: 'index', notice: 'Scaffold demo was successfully created.' }
+        format.json { render :show, status: :created, location: @row }
       else
         format.html { render :new }
-        format.json { render json: @scaffold_demo.errors, status: :unprocessable_entity }
+        format.json { render json: @row.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +42,12 @@ class ScaffoldDemosController < ApplicationController
   # PATCH/PUT /scaffold_demos/1.json
   def update
     respond_to do |format|
-      if @scaffold_demo.update(scaffold_demo_params)
-        format.html { redirect_to @scaffold_demo, notice: 'Scaffold demo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @scaffold_demo }
+      if @row.update(scaffold_demo_params)
+        format.html { redirect_to :back, notice: 'Scaffold demo was successfully updated.' }
+        format.json { render :show, status: :ok, location: @row }
       else
         format.html { render :edit }
-        format.json { render json: @scaffold_demo.errors, status: :unprocessable_entity }
+        format.json { render json: @row.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,9 +55,9 @@ class ScaffoldDemosController < ApplicationController
   # DELETE /scaffold_demos/1
   # DELETE /scaffold_demos/1.json
   def destroy
-    @scaffold_demo.destroy
+    @row.destroy
     respond_to do |format|
-      format.html { redirect_to scaffold_demos_url, notice: 'Scaffold demo was successfully destroyed.' }
+      format.html { redirect_to action: 'index', notice: 'Scaffold demo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +65,7 @@ class ScaffoldDemosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_scaffold_demo
-      @scaffold_demo = ScaffoldDemo.find(params[:id])
+      @row = ScaffoldDemo.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

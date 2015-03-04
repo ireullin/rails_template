@@ -1,68 +1,72 @@
-<div class="container-fluid">
-  <p id="notice"><%= notice %></p>
 
-  <h1>Listing Scaffold Demos</h1>
+<p id="notice"><%= notice %></p>
 
-  <table class="table table-striped">
-    <thead>
+<h1>Listing Scaffold Demos</h1>
+
+<%= kaminari_with_dropdown(@rows) %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="3">
+        <a href="<%= url_for action: 'new' %>" class="fancybox fancybox.ajax">
+          <span class="glyphicon glyphicon-plus"></span>
+        </a>
+      </th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Comment</th>
+      <th>Created date</th>
+      <th>Updated date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rows.each do |row| %>
       <tr>
-        <th colspan="3">
-          <a href="<%= url_for action: 'new' %>" class="fancybox fancybox.ajax">
-            <span class="glyphicon glyphicon-plus"></span>
+        <td>
+          <a href="<%= url_for action: 'show', id: row.id %>" class="fancybox fancybox.ajax">
+            <span class="glyphicon glyphicon-option-horizontal"></span>
           </a>
-        </th>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Comment</th>
-        <th>Created date</th>
-        <th>Updated date</th>
+        </td>
+
+        <td>
+          <a href="<%= url_for action: 'edit', id: row.id %>" class="fancybox fancybox.ajax">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+        </td>
+
+        <td>
+          <a href="<%= url_for action: 'destroy', id: row.id %>" data-confirm="Are you sure?" data-method="delete">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </td>
+
+        <td><%= row.id %></td>
+        <td><%= row.name %></td>
+        <td><%= row.comment %></td>
+        <td><%= row.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td><%= row.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
-      <% @scaffold_demos.each do |row| %>
-        <tr>
-          <td>
-            <a href="<%= url_for action: 'show', id: row.id %>">
-              <span class="glyphicon glyphicon-option-horizontal"></span>
-            </a>
-          </td>
+<%= kaminari_with_dropdown(@rows, dropdown: false) %>
 
-          <td>
-            <a href="<%= url_for action: 'edit', id: row.id %>">
-              <span class="glyphicon glyphicon-pencil"></span>
-            </a>
-          </td>
-
-          <td>
-            <a href="<%= url_for action: 'destroy', id: row.id %>" data-confirm="Are you sure?" data-method="delete">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
-          </td>
-
-          <td><%= row.id %></td>
-          <td><%= row.name %></td>
-          <td><%= row.comment %></td>
-          <td><%= row.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
-          <td><%= row.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
 
 <script language="javascript">
 $(document).ready(ready);
 function ready()
 {console.log(arguments.callee.name);
-  $(".fancybox.ajax").fancybox({
+  $(".fancybox").fancybox({
     parent      : 'body',
-    maxWidth  : 800,
-    maxHeight : 600,
-    fitToView : false,
-    width   : '70%',
-    height    : '70%',
-    autoSize  : false,
+    maxWidth    : 800,
+    maxHeight   : 600,
+    fitToView   : false,
+    width       : '70%',
+    height      : '70%',
+    autoSize    : true,
     closeClick  : false,
     openEffect  : 'none',
     closeEffect : 'none'

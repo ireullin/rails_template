@@ -26,6 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # fancybox2
 gem 'fancybox2-rails', '~> 0.2.8'
 
+gem "kaminari"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
