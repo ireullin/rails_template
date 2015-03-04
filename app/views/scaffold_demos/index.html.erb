@@ -6,62 +6,83 @@
 <%= kaminari_with_dropdown(@rows) %>
 
 <div id="sort-list">
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th colspan="3">
-        <a href="<%= url_for action: 'new' %>" class="fancybox fancybox.ajax">
-          <span class="glyphicon glyphicon-plus"></span>
-        </a>
-      </th>
-      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-id">ID</a></th>
-      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-name">Name</a></th>
-      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-comment">Comment</a></th>
-      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-created-date">Created date</a></th>
-      <th><a style="color:#555555" href="#" class="sort" data-sort="sort-updated-date">Updated date</a></th>
-    </tr>
-  </thead>
-
-  <tbody class="list">
-    <% @rows.each do |row| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td>
-          <a href="<%= url_for action: 'show', id: row.id %>" class="fancybox fancybox.ajax">
-            <span class="glyphicon glyphicon-option-horizontal"></span>
+        <th colspan="3">
+          <a href="<%= url_for action: 'new' %>" class="fancybox fancybox.ajax">
+            <span class="glyphicon glyphicon-plus"></span>
           </a>
-        </td>
-
-        <td>
-          <a href="<%= url_for action: 'edit', id: row.id %>" class="fancybox fancybox.ajax">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </a>
-        </td>
-
-        <td>
-          <a href="<%= url_for action: 'destroy', id: row.id %>" data-confirm="Are you sure?" data-method="delete">
-            <span class="glyphicon glyphicon-trash"></span>
-          </a>
-        </td>
-
-        <td class="sort-id"><%= row.id %></td>
-        <td class="sort-name"><%= row.name %></td>
-        <td class="sort-comment"><%= row.comment %></td>
-        <td class="sort-created-date"><%= row.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
-        <td class="sort-updated-date"><%= row.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        </th>
+        <th><a href="#" class="sort" data-sort="sort-id">ID&nbsp;</a></th>
+        <th><a href="#" class="sort" data-sort="sort-name">Name&nbsp;</a></th>
+        <th><a href="#" class="sort" data-sort="sort-comment">Comment&nbsp;</a></th>
+        <th><a href="#" class="sort" data-sort="sort-created-date">Created date&nbsp;</a></th>
+        <th><a href="#" class="sort" data-sort="sort-updated-date">Updated date&nbsp;</a></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody class="list">
+      <% @rows.each do |row| %>
+        <tr>
+          <td>
+            <a href="<%= url_for action: 'show', id: row.id %>" class="fancybox fancybox.ajax">
+              <span class="glyphicon glyphicon-option-horizontal"></span>
+            </a>
+          </td>
+
+          <td>
+            <a href="<%= url_for action: 'edit', id: row.id %>" class="fancybox fancybox.ajax">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+          </td>
+
+          <td>
+            <a href="<%= url_for action: 'destroy', id: row.id %>" data-confirm="Are you sure?" data-method="delete">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
+
+          <td class="sort-id"><%= row.id %></td>
+          <td class="sort-name"><%= row.name %></td>
+          <td class="sort-comment"><%= row.comment %></td>
+          <td class="sort-created-date"><%= row.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          <td class="sort-updated-date"><%= row.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
+
 <%= kaminari_with_dropdown(@rows, dropdown: false) %>
 
 
 <script language="javascript">
 $(document).ready(ready);
 function ready()
-{
+{//console.log(arguments.callee.name);
+  $(document).one( 'page:before-change', unload);
+  $(document).on( 'click', 'a.sort',  onClickSort );
+
   initFancybox();
   intiList();
+}
+
+
+function unload()
+{//console.log(arguments.callee.name);
+  $(document).off( 'click', 'a.sort');
+}
+
+
+function onClickSort()
+{//console.log(arguments.callee.name);
+  $('a.sort').children('span.glyphicon').remove();
+
+  if($(this).hasClass("asc"))
+    $(this).append('<span class="glyphicon glyphicon glyphicon-chevron-down"></span>');
+  else
+    $(this).append('<span class="glyphicon glyphicon glyphicon-chevron-up"></span>');
 }
 
 
