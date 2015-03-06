@@ -25,7 +25,7 @@ class ScaffoldDemosController < ApplicationController
 
     respond_to do |format|
       if @row.save
-        format.html { redirect_to action: 'index', notice: 'Scaffold demo was successfully created.' }
+        format.html { redirect_to :back, notice: 'Scaffold demo was successfully created.' }
         format.json { render :show, status: :created, location: @row }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class ScaffoldDemosController < ApplicationController
   def destroy
     @row.destroy
     respond_to do |format|
-      format.html { redirect_to action: 'index', notice: 'Scaffold demo was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Scaffold demo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
