@@ -1,3 +1,5 @@
+<% test_data = [['option1','value1'],['option2','value2'],['option3','value3']] %>
+
 <%= form_for(@row) do |f| %>
   <% if @row.errors.any? %>
     <div id="error_explanation">
@@ -14,6 +16,37 @@
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <br>
+    <label for="">
+      <%= f.radio_button :name, "1", checked: true %>
+      male
+    </label>
+    <label for="">
+      <%= f.radio_button :name, "0", checked: false %>
+      female
+    </label>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <br>
+    <label for="">
+      <%= f.check_box :name, checked: true %>
+      after 18
+    </label>
+    <label for="">
+      <%= f.check_box :name, checked: false %>
+      before 65
+    </label>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.select :name, test_data, {include_blank: false}, {class: 'form-control'}%>
   </div>
 
   <div class="form-group">
