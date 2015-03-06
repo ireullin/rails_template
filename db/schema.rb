@@ -11,13 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302061729) do
+ActiveRecord::Schema.define(version: 20150306064042) do
 
   create_table "scaffold_demos", force: :cascade do |t|
     t.string   "name"
     t.text     "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "sex",        default: 1
+    t.integer  "adult",      default: 1
+    t.string   "job",        default: "financial"
   end
 
 end

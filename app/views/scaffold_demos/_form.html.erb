@@ -1,4 +1,4 @@
-<% test_data = [['option1','value1'],['option2','value2'],['option3','value3']] %>
+<% test_data = [['financial','financial'],['option2','value2'],['option3','value3']] %>
 
 <%= form_for(@row) do |f| %>
   <% if @row.errors.any? %>
@@ -19,34 +19,30 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :name %>
+    <label>Sexual</label>
     <br>
-    <label for="">
-      <%= f.radio_button :name, "1", checked: true %>
+    <%= f.label :sex_1 do %>
+      <%= f.radio_button :sex, "1" %>
       male
-    </label>
-    <label for="">
-      <%= f.radio_button :name, "0", checked: false %>
+    <% end %>
+    <%= f.label :sex_0 do %>
+      <%= f.radio_button :sex, "0" %>
       female
-    </label>
+    <% end %>
   </div>
 
   <div class="form-group">
-    <%= f.label :name %>
+    <label>Adult</label>
     <br>
-    <label for="">
-      <%= f.check_box :name, checked: true %>
-      after 18
-    </label>
-    <label for="">
-      <%= f.check_box :name, checked: false %>
-      before 65
-    </label>
+    <%= f.label :adult do %>
+      <%= f.check_box :adult, options:nil, checked_value: "1", unchecked_value: "0" %>
+      I'm 18 years old
+    <% end %>
   </div>
 
   <div class="form-group">
-    <%= f.label :name %>
-    <%= f.select :name, test_data, {include_blank: false}, {class: 'form-control'}%>
+    <%= f.label :job %>
+    <%= f.select :job, test_data, {include_blank: false}, {class: 'form-control'}%>
   </div>
 
   <div class="form-group">
