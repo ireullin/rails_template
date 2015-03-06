@@ -1,5 +1,3 @@
-<% test_data = [['financial','financial'],['option2','value2'],['option3','value3']] %>
-
 <%= form_for(@row) do |f| %>
   <% if @row.errors.any? %>
     <div id="error_explanation">
@@ -21,11 +19,11 @@
   <div class="form-group">
     <label>Sexual</label>
     <br>
-    <%= f.label :sex_1 do %>
+    <%= f.label :sex_1, class: 'radio-inline' do %>
       <%= f.radio_button :sex, "1" %>
       male
     <% end %>
-    <%= f.label :sex_0 do %>
+    <%= f.label :sex_0, class: 'radio-inline' do %>
       <%= f.radio_button :sex, "0" %>
       female
     <% end %>
@@ -34,7 +32,7 @@
   <div class="form-group">
     <label>Adult</label>
     <br>
-    <%= f.label :adult do %>
+    <%= f.label :adult, class: 'checkbox-inline' do %>
       <%= f.check_box :adult, options:nil, checked_value: "1", unchecked_value: "0" %>
       I'm 18 years old
     <% end %>
@@ -42,6 +40,7 @@
 
   <div class="form-group">
     <%= f.label :job %>
+    <% test_data = [['financial','financial'],['option2','value2'],['option3','value3']] %>
     <%= f.select :job, test_data, {include_blank: false}, {class: 'form-control'}%>
   </div>
 
