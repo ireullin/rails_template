@@ -28,6 +28,10 @@ gem 'fancybox2-rails', '0.2.8'
 
 gem "kaminari"
 
+gem 'momentjs-rails', '>= 2.8.1'
+
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

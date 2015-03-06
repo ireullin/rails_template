@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap.min.js
 //= require fancybox
+//= require moment
 //= require turbolinks
 //= require_tree .
