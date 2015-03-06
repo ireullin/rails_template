@@ -1,2 +1,26 @@
 <h1>Editing Scaffold Demo</h1>
 <%= render 'form' %>
+
+<script language="javascript">
+$(document).ready(ready);
+function ready()
+{//console.log(arguments.callee.name);
+  $(document).one( 'page:before-change', unload);
+
+  initDatetimepicker();
+}
+
+
+function unload()
+{//console.log(arguments.callee.name);
+
+}
+
+
+function initDatetimepicker()
+{
+  $('.input-group.date').datetimepicker({
+    format: 'YYYY-MM-DD HH:mm:ss'
+  });
+}
+</script>

@@ -64,6 +64,6 @@ class ScaffoldDemosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def get_params
-      params.require(:scaffold_demo).permit(:name, :comment, :sex, :adult, :job)
+      params.require(:scaffold_demo).permit(:name, :comment, :sex, :adult, :job, :notified_at)
     end
 end

@@ -20,6 +20,7 @@
         <th><a href="#" class="sort" data-sort="sort-adult">Adult&nbsp;</a></th>
         <th><a href="#" class="sort" data-sort="sort-job">Job&nbsp;</a></th>
         <th><a href="#" class="sort" data-sort="sort-comment">Comment&nbsp;</a></th>
+        <th><a href="#" class="sort" data-sort="sort-notified-date">Notified date&nbsp;</a></th>
         <th><a href="#" class="sort" data-sort="sort-created-date">Created date&nbsp;</a></th>
         <th><a href="#" class="sort" data-sort="sort-updated-date">Updated date&nbsp;</a></th>
       </tr>
@@ -52,6 +53,7 @@
           <td class="sort-adult"><%= row.adult==1 ? 'yes':'no' %></td>
           <td class="sort-job"><%= row.job %></td>
           <td class="sort-comment"><%= row.comment %></td>
+          <td class="sort-notified-date"><%= row.notified_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
           <td class="sort-created-date"><%= row.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
           <td class="sort-updated-date"><%= row.updated_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
         </tr>
@@ -102,6 +104,7 @@ function intiList()
       "sort-sex",
       "sort-adult",
       "sort-job",
+      "sort-notified-date",
       "sort-created-date",
       "sort-updated-date",
     ]
