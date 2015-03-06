@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # fancybox2
-gem 'fancybox2-rails', '~> 0.2.8'
+gem 'fancybox2-rails', '0.2.8'
 
 gem "kaminari"
 
