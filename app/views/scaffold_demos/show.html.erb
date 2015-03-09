@@ -4,6 +4,26 @@
 </p>
 
 <p>
+  <strong>Sexual:</strong>
+  <%= @row.sex==1 ? 'male':'female' %>
+</p>
+
+<p>
+  <strong>Adult:</strong>
+  <%= @row.adult==1 ? 'yes':'no' %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @row.job %>
+</p>
+
+<p>
   <strong>Comment:</strong>
   <%= @row.comment %>
+</p>
+
+<p>
+  <strong>Notified date:</strong>
+  <%= @row.notified_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %>
 </p>
