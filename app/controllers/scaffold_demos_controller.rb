@@ -3,7 +3,7 @@ class ScaffoldDemosController < ApplicationController
 
   def index
     params[:page] ||=1
-    @rows = ScaffoldDemo.page(params[:page]).per(20)
+    @rows = ScaffoldDemo.order(id: :desc).page(params[:page]).per(20)
   end
 
 
@@ -64,6 +64,7 @@ class ScaffoldDemosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def get_params
+      params[:scaffold_demo][:notified_at] = Time.parse(params[:scaffold_demo][:notified_at]).getutc
       params.require(:scaffold_demo).permit(:name, :comment, :sex, :adult, :job, :notified_at)
     end
 end
